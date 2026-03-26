@@ -1,0 +1,25 @@
+{
+"name": "qr-code-generator-service",
+"version": "1.0.0",
+"description": "Service for generating QR codes in SVG format using Node.js",
+"main": "index.js",
+"scripts": {
+"start": "node index.js"
+},
+"keywords": [
+"qr-code",
+"node",
+"express",
+"svg",
+"api"
+],
+"license": "ISC",
+"engines": {
+"node": ">=18"
+},
+"dependencies": {
+"cors": "^2.8.6",
+"express": "^5.2.1",
+"qrcode": "^1.5.4"
+}
+}
