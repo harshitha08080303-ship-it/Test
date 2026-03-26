@@ -13,7 +13,6 @@ app.post('/generate-qr', async (req, res) => {
 try {
 console.log('Incoming body:', req.body);
 
-```
     const url = req.body && req.body.url;
 
     if (!url) {
