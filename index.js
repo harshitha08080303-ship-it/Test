@@ -44,7 +44,6 @@ console.log('Incoming body:', req.body);
         error: 'Failed to generate QR code'
     });
 }
-```
 
 });
 
