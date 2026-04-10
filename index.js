@@ -6,20 +6,20 @@ const rateLimit = require('express-rate-limit');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// 🔒 Request size limit
+// Request size limit
 app.use(express.json({ limit: '1mb' }));
 
-// 🌐 CORS
+//  CORS
 app.use(cors());
 
-// 🚦 Rate limiting (protects from overload / retries)
+// Rate limiting (protects from overload / retries)
 const limiter = rateLimit({
     windowMs: 60 * 1000, // 1 minute
     max: 100             // max 100 requests per minute
 });
 app.use(limiter);
 
-// ⏱️ Timeout protection
+//  Timeout protection
 app.use((req, res, next) => {
     res.setTimeout(10000, () => {
         res.status(408).json({ success: false, error: 'Request timeout' });
@@ -27,12 +27,12 @@ app.use((req, res, next) => {
     next();
 });
 
-// 🔥 QR Generation API (Bulk)
+// QR Generation API (Bulk)
 app.post('/generate-qr', async (req, res) => {
     try {
         const items = req.body?.items;
 
-        // ✅ Validate input
+        //  Validate input
         if (!Array.isArray(items) || items.length === 0) {
             return res.status(400).json({
                 success: false,
@@ -40,7 +40,7 @@ app.post('/generate-qr', async (req, res) => {
             });
         }
 
-        // 🔒 Protect server
+        // Protect server
         if (items.length > 50) {
             return res.status(400).json({
                 success: false,
@@ -50,7 +50,7 @@ app.post('/generate-qr', async (req, res) => {
 
         console.log(`QR request received: ${items.length} items`);
 
-        // ⚡ Parallel processing
+        // Parallel processing
         const results = await Promise.all(
             items.map(async (item) => {
                 const { id, url } = item;
@@ -105,12 +105,12 @@ app.post('/generate-qr', async (req, res) => {
     }
 });
 
-// 🩺 Health check
+// Health check
 app.get('/', (req, res) => {
     res.send('QR Code Generator API is running');
 });
 
-// 🚀 Start server
+// Start server
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
