@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(cors());
 
-// QR Generation API (Multiple მხარდაჭერა)
+// QR Generation API (Multiple)
 app.post('/generate-qr', async (req, res) => {
     try {
         console.log('Incoming body:', req.body);
